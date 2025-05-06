@@ -1,0 +1,41 @@
+.wrapper {
+  border: 2px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 350px;
+  background: white;
+}
+
+.twoIconsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.iconsWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.iconsWrapper p {
+  margin: 0;
+}
+
+.button {
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  background-color: grey;
+  color: black;
+  cursor: pointer;
+  border-radius: 4px;
+  outline: none;
+  align-self: center;
+}

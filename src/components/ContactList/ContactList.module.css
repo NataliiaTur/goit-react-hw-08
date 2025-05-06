@@ -1,0 +1,18 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 0;
+  list-style-type: none;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.list li {
+  display: flex;
+  width: calc(33.333% - 20px);
+  min-width: 280px;
+  max-width: 364px;
+  flex-grow: 1;
+}
