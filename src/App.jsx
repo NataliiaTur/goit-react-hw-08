@@ -1,31 +1,47 @@
-import { useState, useEffect } from "react";
 import "./App.css";
-import ContactForm from "./components/ContactForm/ContactForm";
-import SearchBox from "./components/SearchBox/SearchBox";
-import ContactList from "./components/ContactList/ContactList";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDataThunk } from "./redux/contactsOps";
-import { selectError, selectLoading } from "./redux/contactsSlice";
-import { selectNameFilter } from "./redux/filtersSlice";
+import HomePage from "./pages/HomePage/HomePage";
+import LoginPage from "./pages/LoginPage";
+import RegistrationPage from "./pages/RegistrationPage";
+import ContactsPage from "./pages/ContactsPage";
+import { Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout/Layout";
+import { useEffect } from "react";
+import { refreshThunk } from "./redux/auth/operations";
+import NotFound from "./components/NotFound/NotFound";
+import { selectIsRefreshing } from "./redux/auth/selectors";
+import PrivateRoute from "./components/PrivateRoute";
+import toast, { Toaster } from "react-hot-toast";
 
 function App() {
   const dispatch = useDispatch();
-
-  const isLoading = useSelector(selectLoading);
-  const error = useSelector(selectError);
-  const filter = useSelector(selectNameFilter);
+  const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
-    dispatch(fetchDataThunk());
+    dispatch(refreshThunk());
   }, [dispatch]);
 
-  return (
+  return isRefreshing ? null : (
     <div className="wrapper">
-      <h1 className="title">Phonebook</h1>
-      <ContactForm />
-      {isLoading && !error && <h2>Request in progress...</h2>}
-      <SearchBox />
-      <ContactList />
+      {/* !==маршрутизація===== */}
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegistrationPage />} />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute>
+                <ContactsPage />
+              </PrivateRoute>
+            }
+          />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Toaster />
+      {/* !==маршрутизація===== */}
     </div>
   );
 }

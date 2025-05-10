@@ -3,8 +3,9 @@ import {
   addContactThunk,
   deleteContactThunk,
   fetchDataThunk,
-} from "./contactsOps";
-import { selectNameFilter } from "./filtersSlice";
+} from "../contacts/operations";
+import { selectNameFilter } from "../filters/selectors";
+import { logoutThunk } from "../auth/operations";
 
 // 1 Початкові рамки, в яких працює слайс.
 const initialState = {
@@ -33,6 +34,9 @@ const slice = createSlice({
       .addCase(deleteContactThunk.fulfilled, (state, action) => {
         state.items = state.items.filter((item) => item.id !== action.payload);
       })
+
+      //  видалення стану після логауту
+      .addCase(logoutThunk.fulfilled, () => initialState)
 
       // додавання
       .addCase(addContactThunk.fulfilled, (state, action) => {
@@ -89,18 +93,3 @@ export const {
 // 7 .Повертаємо для стору редьюсер зі слайсу
 const contactsReducer = slice.reducer;
 export default contactsReducer;
-
-// ! =======  selectors ===========
-export const selectContacts = (state) => state.contacts.items;
-export const selectLoading = (state) => state.contacts.isLoading;
-export const selectError = (state) => state.contacts.error;
-
-export const selectFilteredContacts = createSelector(
-  [selectContacts, selectNameFilter],
-  (contacts, filter) => {
-    console.log("filter");
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
-  }
-);

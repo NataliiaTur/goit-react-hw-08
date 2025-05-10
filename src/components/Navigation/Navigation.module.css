@@ -1,0 +1,17 @@
+.wrapperNavigation {
+  display: flex;
+  gap: 20px;
+  font-size: 26px;
+  align-items: center;
+}
+
+.link {
+  color: #2a2a2a;
+  text-decoration: none;
+}
+
+.active {
+  color: #0a4647;
+  font-size: 20px;
+  font-weight: bold;
+}

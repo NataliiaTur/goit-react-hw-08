@@ -1,18 +1,12 @@
-.formContainer {
+form {
   display: flex;
   flex-direction: column;
   max-width: 520px;
-  margin: 0 auto 20px;
+  margin: 0 auto;
   padding: 15px;
   background-color: #fdfdfd;
   border-radius: 12px;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
-  gap: 16px;
-}
-
-.inputGroup {
-  display: flex;
-  flex-direction: column;
 }
 
 label {
@@ -26,6 +20,7 @@ input {
   border: 1px solid #bbb;
   border-radius: 8px;
   font-size: 16px;
+  margin-bottom: 10px;
   outline: none;
   transition: border-color 0.2s ease;
 }
@@ -37,10 +32,9 @@ input:focus {
 span {
   color: #cc3333;
   font-size: 14px;
-  margin-top: 4px;
 }
 
-.button {
+button {
   padding: 12px 20px;
   font-size: 16px;
   background-color: #469597;
@@ -52,6 +46,16 @@ span {
   margin-top: 10px;
 }
 
-.button:hover {
+button:hover {
   background-color: #3b7f81;
+}
+
+a {
+  font-size: 14px;
+  color: #469597;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }

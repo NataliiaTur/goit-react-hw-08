@@ -4,8 +4,9 @@ import { useId } from "react";
 import * as Yup from "yup";
 import { nanoid } from "nanoid";
 import { useDispatch, useSelector } from "react-redux";
-import { addContact, selectContacts } from "../../redux/contactsSlice";
-import { addContactThunk } from "../../redux/contactsOps";
+import { addContact } from "../../redux/contacts/slice";
+import { addContactThunk } from "../../redux/contacts/operations";
+import { selectContacts } from "../../redux/contacts/selectors";
 
 const ContactFormSchema = Yup.object().shape({
   name: Yup.string()
@@ -13,10 +14,7 @@ const ContactFormSchema = Yup.object().shape({
     .max(50, "Too long!")
     .required("Required"),
   number: Yup.string()
-    .matches(
-      /^\+?\d{1,4}[-.\s]?\d{2,4}[-.\s]?\d{2,4}[-.\s]?\d{2,4}$/,
-      "Invalid phone number"
-    )
+    .matches(/^\+?[0-9\s\-().]{7,20}$/, "Invalid phone number")
     .min(7, "Too short!")
     .max(15, "Too long!")
     .required("Required"),
